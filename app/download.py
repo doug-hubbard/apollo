@@ -1,5 +1,6 @@
 import sys
 import argparse
+import re
 from pytube import YouTube
 
 
@@ -8,7 +9,9 @@ def download(url):
     audio = yt.streams.filter(only_audio = True).first()
     author = yt.author
     title = yt.title
-    audio.download(output_path="downloads",filename=f"{author}-{title}.mp4")
+    filename = f"{author}-{title}.mp4"
+    clean_file = re.sub('[^A-Za-z0-9 ]+', '', filename)
+    audio.download(output_path="downloads",filename=clean_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
