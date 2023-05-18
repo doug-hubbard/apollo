@@ -6,7 +6,9 @@ from pytube import YouTube
 def download(url):
     yt = YouTube(url)
     audio = yt.streams.filter(only_audio = True).first()
-    audio.download(output_path="downloads",filename="new.mp4")
+    author = yt.author
+    title = yt.title
+    audio.download(output_path="downloads",filename=f"{author}-{title}.mp4")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
