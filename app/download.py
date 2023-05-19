@@ -9,8 +9,9 @@ def download(url):
     audio = yt.streams.filter(only_audio = True).first()
     author = yt.author
     title = yt.title
-    filename = f"{author}-{title}.mp4"
+    filename = f"{author}-{title}"
     clean_file = re.sub('[^A-Za-z0-9 ]+', '', filename)
+    clean_file = f"{clean_file}.mp4"
     audio.download(output_path="downloads",filename=clean_file)
 
 if __name__ == "__main__":
